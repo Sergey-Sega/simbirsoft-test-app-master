@@ -1,8 +1,8 @@
 import React from "react";
 
-interface TeamProps {}
+//interface TeamProps {}
 
-const Team: React.FC<TeamProps> = () => {
+const Team: React.FC = () => {
   return <div>team</div>;
 };
 

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchCompetition } from "service/competitions";
 
-interface CompetitionProps {}
+//interface CompetitionProps {}
 
-const Competition: React.FC<CompetitionProps> = () => {
+const Competition: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [values, setValues] = useState({});
   useEffect(() => {
     (async function () {
       setIsLoading(true);
       try {
-        const leagues = await fetchCompetition(2000);
-        console.log(leagues);
+        const leagues: any = await fetchCompetition(2000);
+        setValues(leagues);
       } catch (error) {
         console.log(error);
       } finally {
@@ -18,12 +19,16 @@ const Competition: React.FC<CompetitionProps> = () => {
       }
     })();
   }, []);
-
+  console.log(values);
   return (
     <div className="App-wrapper">
-      {isLoading ? <div>...loading</div> : <div>loh</div>}
+      {isLoading ? (
+        <div>...loading</div>
+      ) : (
+        <pre>{JSON.stringify(values, null, 2)}</pre>
+      )}
     </div>
   );
 };
 
-export default Competition;
+export { Competition as default };
